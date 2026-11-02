@@ -41,7 +41,7 @@ h1{font-size:40px;line-height:1.2;font-weight:700;margin-top:56px;letter-spacing
 .welcome{text-align:center;margin-top:28px}
 .welcome h2{font-size:26px;font-weight:700}
 .welcome p{font-size:19px;color:var(--muted);margin-top:6px}
-.field{margin-top:20px;height:58px;border:1.5px solid var(--line);border-radius:14px;display:flex;align-items:center;padding:0 22px;gap:18px;color:#5b6a86;font-size:19px;background:#fbfcff}
+.field{margin-top:22px;height:58px;border:1.5px solid var(--line);border-radius:14px;display:flex;align-items:center;padding:0 22px;gap:18px;color:#5b6a86;font-size:19px;background:#fbfcff}
 .field:first-of-type{margin-top:34px}
 .field input{border:0;outline:0;background:none;font:inherit;color:var(--navy);flex:1;min-width:0}
 .field input::placeholder{color:#5b6a86}
@@ -50,17 +50,17 @@ h1{font-size:40px;line-height:1.2;font-weight:700;margin-top:56px;letter-spacing
 .chk{display:flex;align-items:center;gap:14px;color:var(--ink);cursor:pointer}
 .box{width:24px;height:24px;border-radius:6px;background:var(--blue);display:grid;place-items:center}
 .row a{color:var(--blue);text-decoration:none;font-weight:500}
-.login{margin-top:22px;height:56px;border:0;border-radius:30px;width:100%;background:linear-gradient(180deg,#1a76f0,#0a5bd8);color:#fff;font:600 21px 'Inter';display:flex;align-items:center;justify-content:center;gap:14px;cursor:pointer;box-shadow:0 6px 16px rgba(10,99,224,.3)}
-.or{display:flex;align-items:center;gap:16px;margin-top:22px;color:var(--ink);font-size:15px;justify-content:center}
+.login{margin-top:30px;height:56px;border:0;border-radius:30px;width:100%;background:linear-gradient(180deg,#1a76f0,#0a5bd8);color:#fff;font:600 21px 'Inter';display:flex;align-items:center;justify-content:center;gap:14px;cursor:pointer;box-shadow:0 6px 16px rgba(10,99,224,.3)}
+.or{display:flex;align-items:center;gap:16px;margin-top:14px;color:var(--ink);font-size:15px;justify-content:center}
 .or::before,.or::after{content:"";flex:1;height:1px;background:#dfe6f2}
-.soc{display:grid;grid-template-columns:1fr;gap:14px;margin-top:20px}
+.soc{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}
 .soc button{height:50px;border:1.5px solid var(--line);border-radius:25px;background:#fff;font:500 17px 'Inter';color:var(--navy);display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer}
 .org{margin-top:auto;background:#e9f1fd;border-radius:12px;padding:12px 18px;display:flex;align-items:center;gap:12px}
 .org b{font-size:15.5px;display:block;font-weight:600}
 .org em{font-size:13.5px;color:var(--ink)}
 .org .on{margin-left:auto;font-size:13.5px;display:flex;align-items:center;gap:8px}
 .org .on::before{content:"";width:10px;height:10px;border-radius:50%;background:#22c55e}
-.spacer{height:22px}
+.spacer{height:10px}.alt{text-align:center;margin-top:14px;font-size:15.5px;color:var(--ink)}.alt a{color:var(--blue);font-weight:600;text-decoration:none;margin-left:6px}
 footer{height:51px;background:#0a1f4e;color:#e8eefb;display:flex;align-items:center;justify-content:space-between;padding:0 40px;font-size:15px}
 footer div{display:flex;align-items:center;gap:14px}
 .lang span[data-l]{cursor:pointer;padding:3px 6px;border-radius:14px;transition:.15s}.lang span.on{background:#fff;color:var(--blue);font-weight:700}.lang .sep{opacity:.5;margin:0 -4px}
@@ -71,6 +71,38 @@ footer div{display:flex;align-items:center;gap:14px}
 .toast{position:fixed;left:50%;bottom:70px;transform:translate(-50%,20px);background:#0b1f4d;color:#fff;padding:13px 22px;border-radius:12px;font-size:15px;opacity:0;pointer-events:none;transition:.25s;max-width:90vw;text-align:center;z-index:50}.toast.show{opacity:1;transform:translate(-50%,0)}
 @media(max-width:900px){.stage{margin:12px}.right{padding:24px 22px}}
 @media(max-width:900px){.stage{grid-template-columns:1fr}.left{display:none}.right{border-radius:22px}}
+.login,.soc button{font-family:'Inter',system-ui,-apple-system,'Segoe UI',Arial,'Noto Sans Bengali',sans-serif}
+.dash{position:fixed;inset:0;background:#f1f5fb;z-index:100;display:none;flex-direction:column}.dash.show{display:flex}
+.tb{height:62px;background:#fff;border-bottom:1px solid #e1e8f4;display:flex;align-items:center;gap:24px;padding:0 24px;flex:none}
+.lg{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:700;color:var(--navy);min-width:196px}.lg b{color:var(--blue)}
+.sr{display:flex;align-items:center;gap:10px;background:#f1f5fb;border:1px solid #e1e8f4;border-radius:22px;padding:0 16px;height:40px;width:min(380px,32vw)}.sr input{border:0;outline:0;background:none;font:inherit;font-size:15px;flex:1;min-width:0;color:var(--navy)}
+.tr{margin-left:auto;display:flex;align-items:center;gap:22px}
+.lang2{display:flex;align-items:center;gap:4px;font-size:14px}.lang2 span[data-l]{cursor:pointer;padding:4px 9px;border-radius:14px}.lang2 span.on{background:#e3eefd;color:var(--blue);font-weight:700}.lang2 .sep{opacity:.4}
+.ib{position:relative;border:0;background:none;cursor:pointer;display:grid;place-items:center}.bd{position:absolute;top:-6px;right:-8px;background:#e5484d;color:#fff;font:700 11px 'Inter',sans-serif;border-radius:10px;padding:1px 6px;font-style:normal}
+.hp{font-size:15px;cursor:pointer;color:var(--ink)}
+.um{position:relative;display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600;cursor:pointer;padding:6px 8px;border-radius:10px}.um:hover{background:#f1f5fb}
+.ua{width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-weight:700}
+.dd{display:none;position:absolute;right:0;top:100%;background:#fff;border:1px solid #e1e8f4;border-radius:10px;box-shadow:0 8px 24px rgba(20,50,110,.15);min-width:150px;overflow:hidden}.um:hover .dd,.um:focus-within .dd{display:block}
+.dd button{width:100%;padding:12px 16px;border:0;background:#fff;text-align:left;font:500 14.5px 'Inter','Noto Sans Bengali',sans-serif;cursor:pointer;color:#c2262b}.dd button:hover{background:#fdf0f0}
+.bodyd{flex:1;display:flex;min-height:0}
+.sb{width:224px;background:#fff;border-right:1px solid #e1e8f4;padding:18px 12px;overflow-y:auto;flex:none}
+.sb a{display:flex;align-items:center;gap:14px;padding:11px 14px;border-radius:10px;color:var(--ink);font-size:15.5px;font-weight:500;cursor:pointer;margin-bottom:2px;text-decoration:none}
+.sb a:hover{background:#f1f5fb}.sb a.on{background:#e3eefd;color:var(--blue);font-weight:600}.sb a.set{margin-top:22px;border-top:1px solid #e9eef7;border-radius:0 0 10px 10px;padding-top:16px}
+.sb svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.mn{flex:1;overflow-y:auto;padding:30px 40px}
+.ov{margin-top:0!important;max-width:none!important;font-size:24px;letter-spacing:.8px;color:var(--navy);margin-bottom:24px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.kc,.pn{background:#fff;border-radius:16px;padding:22px 26px;box-shadow:0 2px 14px rgba(30,70,140,.07);border:1px solid #e6edf8}
+.kl{font-size:15px;color:var(--muted);font-weight:500}.kv{font-size:46px;font-weight:800;color:var(--navy);margin:6px 0 14px;letter-spacing:-1px}
+.ks{height:8px;background:#e6edf8;border-radius:6px;overflow:hidden}.ks span{display:block;height:100%;background:linear-gradient(90deg,#1a76f0,#4aa3ff);border-radius:6px}.ks span.g{background:linear-gradient(90deg,#16a34a,#4ade80)}
+.pn{margin-top:22px}.pt{font-size:18px;font-weight:700;margin-bottom:18px;color:var(--navy)}
+.bar{height:34px;background:#e6edf8;border-radius:10px;overflow:hidden}.bar span{display:flex;align-items:center;justify-content:flex-end;padding-right:14px;height:100%;background:linear-gradient(90deg,#0a5bd8,#3b8cff);color:#fff;font-weight:700;border-radius:10px}
+.bl{display:flex;justify-content:space-between;margin-top:10px;font-size:14px;color:var(--muted)}
+.is{list-style:none}.is li{display:flex;align-items:center;gap:14px;padding:14px 4px;border-bottom:1px solid #eef2f9;font-size:17px;color:var(--navy)}.is li:last-child{border:0}
+.dt{width:16px;height:16px;border-radius:50%;flex:none}.dt.r{background:#e5484d;box-shadow:0 0 0 4px #fde4e4}.dt.o{background:#f5873b;box-shadow:0 0 0 4px #fdebdc}
+.tg{margin-left:auto;font-style:normal;font-size:12.5px;font-weight:600;padding:4px 12px;border-radius:12px}.tg.r{background:#fde4e4;color:#c2262b}.tg.o{background:#fdebdc;color:#b4540f}
+.soon{color:var(--muted);font-size:17px;text-align:center;padding:70px 20px}
+@media(max-width:860px){.sb{width:62px;padding:14px 8px}.sb a span{display:none}.sb a{justify-content:center;padding:12px}.mn{padding:20px}.kpis{grid-template-columns:1fr}.hp,.sr{display:none}.lg{min-width:0}}
 </style>
 </head>
 <body>
@@ -104,85 +136,103 @@ footer div{display:flex;align-items:center;gap:14px}
       <div class="tag" data-i18n="tag2">Textile<span>|</span>Garments<span>|</span>Beyond</div>
     </div>
     <div class="welcome"><h2 data-i18n="wel">Welcome Back!</h2><p data-i18n="wsub">Sign in to continue your journey</p></div>
-    <label class="field"><svg width="26" height="26" viewBox="0 0 24 24" fill="#3a4a68"><circle cx="12" cy="8" r="4.2"/><path d="M3.5 21c0-5 4-7 8.5-7s8.5 2 8.5 7z"/></svg><input placeholder="Username / Email" data-ph="user" type="text" id="un" autocomplete="username"></label>
+    <label class="field"><svg width="26" height="26" viewBox="0 0 24 24" fill="#3a4a68"><circle cx="12" cy="8" r="4.2"/><path d="M3.5 21c0-5 4-7 8.5-7s8.5 2 8.5 7z"/></svg><input placeholder="Email" data-ph="user" type="text" id="un" autocomplete="off"></label>
     <label class="field"><svg width="26" height="26" viewBox="0 0 24 24" fill="#3a4a68"><rect x="4" y="10" width="16" height="12" rx="2.5"/><path d="M8 10V7a4 4 0 018 0v3" fill="none" stroke="#3a4a68" stroke-width="2.4"/></svg><input placeholder="Password" data-ph="pass" type="password" id="pw" autocomplete="current-password">
       <svg id="eye" style="cursor:pointer" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3a4a68" stroke-width="2"><path d="M1.5 12S5.5 5 12 5s10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3.2" fill="#3a4a68"/></svg></label>
     <div class="row">
       <label class="chk" id="chk"><span class="box" id="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></span><span data-i18n="rem">Remember Me</span></label>
-      <a href="#" id="forgot" data-i18n="forgot">Forgot Password?</a>
+      <span></span>
     </div>
     <button class="login" id="loginBtn"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h5a1 1 0 011 1v14a1 1 0 01-1 1h-5M3 12h11M10 7l5 5-5 5"/></svg><span data-i18n="login">Login</span></button>
-    <div class="or"><span data-i18n="or">Or continue with</span></div>
-    <div class="soc"><button id="gbtn" type="button"><svg width="24" height="24" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.5l6.7-6.7C35.7 2.4 30.2 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.3 13.6 17.700 9.500 24 9.500z"/><path fill="#4285F4" d="M46.500 24.500c0-1.600-.1-3.100-.4-4.500H24v9h12.700c-.6 3-2.300 5.500-4.800 7.200l7.500 5.800c4.400-4.100 7.100-10.100 7.100-17.500z"/><path fill="#FBBC05" d="M10.400 28.700A14.500 14.500 0 019.500 24c0-1.600.3-3.200.8-4.700l-7.800-6.100A24 24 0 000 24c0 3.900.9 7.500 2.600 10.800z"/><path fill="#34A853" d="M24 48c6.200 0 11.500-2 15.300-5.600l-7.500-5.800c-2 1.400-4.700 2.300-7.800 2.300-6.300 0-11.700-4.200-13.600-9.900l-7.800 6.100C6.500 42.600 14.600 48 24 48z"/></svg><span data-i18n="google">Google</span></button></div>
     <div class="spacer"></div>
     <div class="org">
       <svg width="34" height="28" viewBox="0 0 34 28" fill="#0a63e0"><path d="M1 27V13l8 5v-6l8 5V6h5v11l3-1V2h5v25z"/></svg>
       <div><b>Nexora Manufacturing</b></div>
       <span class="on" data-i18n="online">System Online</span>
     </div>
-    <div class="session" id="session"><div class="av" id="av"></div><h2 id="sHi"></h2><p id="sMail"></p><button class="login" id="out" style="max-width:260px"><span data-i18n="out">Sign out</span></button></div>
-  </section>
+      </section>
+</div>
+<div class="dash" id="dash">
+  <header class="tb">
+    <div class="lg"><svg width="34" height="28" viewBox="0 0 116 92"><path d="M6 88L40 32l16 26 16-30 8 6 12-10 6 4v60H78V62L62 88H46L32 66 24 88z" fill="#0b2a6b"/><path d="M62 88l16-26v26zM78 62l14-22h24v48H92V62z" fill="#1585d8"/></svg><span>TexNext <b>ERP</b></span></div>
+    <label class="sr"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5b6a86" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input data-ph="search" placeholder="Search..."></label>
+    <div class="tr">
+      <div class="lang2"><span data-l="en">EN</span><span class="sep">|</span><span data-l="bn">বাংলা</span></div>
+      <button class="ib" title="Notifications"><svg width="22" height="22" viewBox="0 0 24 24" fill="#f5a524"><path d="M12 2a6 6 0 00-6 6v4l-2 4h16l-2-4V8a6 6 0 00-6-6zM9.5 19a2.5 2.5 0 005 0z"/></svg><i class="bd">3</i></button>
+      <span class="hp" data-i18n="help">Help</span>
+      <div class="um" id="um"><span class="ua" id="ua">F</span><span id="un2">Farhad</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0b1f4d" stroke-width="3"><path d="M6 9l6 6 6-6"/></svg>
+        <div class="dd"><button id="out" data-i18n="out">Sign out</button></div></div>
+    </div>
+  </header>
+  <div class="bodyd">
+    <nav class="sb" id="nav"></nav>
+    <main class="mn">
+      <div id="v-dashboard">
+        <h1 class="ov" data-i18n="ov">EXECUTIVE OVERVIEW</h1>
+        <div class="kpis">
+          <div class="kc"><div class="kl" data-i18n="k1">Orders</div><div class="kv">125</div><div class="ks"><span style="width:78%"></span></div></div>
+          <div class="kc"><div class="kl" data-i18n="k2">Production</div><div class="kv">91%</div><div class="ks"><span style="width:91%"></span></div></div>
+          <div class="kc"><div class="kl" data-i18n="k3">Quality</div><div class="kv">98%</div><div class="ks"><span class="g" style="width:98%"></span></div></div>
+        </div>
+        <div class="pn"><div class="pt" data-i18n="pvp">Production vs Plan</div>
+          <div class="bar"><span style="width:91%">91%</span></div>
+          <div class="bl"><span data-i18n="actual">Actual</span><span data-i18n="plan">Plan 100%</span></div></div>
+        <div class="pn"><div class="pt" data-i18n="issues">Critical Issues</div>
+          <ul class="is">
+            <li><i class="dt r"></i><span data-i18n="i1">Order #125 delayed</span><em class="tg r" data-i18n="crit">Critical</em></li>
+            <li><i class="dt o"></i><span data-i18n="i2">Fabric shortage</span><em class="tg o" data-i18n="warn">Warning</em></li>
+            <li><i class="dt r"></i><span data-i18n="i3">Quality rejection</span><em class="tg r" data-i18n="crit">Critical</em></li>
+          </ul></div>
+      </div>
+      <div id="v-other" style="display:none"><h1 class="ov" id="ovName"></h1><div class="pn soon" data-i18n="soon">This module is coming soon</div></div>
+    </main>
+  </div>
 </div>
 <div class="toast" id="toast"></div>
 <footer>
   <div><svg width="26" height="28" viewBox="0 0 24 26" fill="none" stroke="#4d93ff" stroke-width="2"><path d="M12 2l9 3v7c0 5-4 9-9 11-5-2-9-6-9-11V5z"/><path d="M8 12l3 3 5-6"/></svg><span data-i18n="secure">Secure • Reliable • Scalable</span></div>
   <span data-i18n="copy">© 2026 TexNext ERP. All rights reserved.</span>
 </footer>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
-// ====== SETUP: Google Cloud Console থেকে OAuth Client ID বসান ======
-const GOOGLE_CLIENT_ID='YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
-// ===================================================================
+const USER_ID='Farhad',USER_PASS='1234';
 const T={
-en:{tag:'Smart Factory. Smarter Business.',h1:'Complete Textile &amp; Garments Management Solution',sub:'From Order to Delivery — All in One Platform',
+en:{help:'Help',search:'Search...',ov:'EXECUTIVE OVERVIEW',k1:'Orders',k2:'Production',k3:'Quality',pvp:'Production vs Plan',actual:'Actual',plan:'Plan 100%',issues:'Critical Issues',i1:'Order #125 delayed',i2:'Fabric shortage',i3:'Quality rejection',crit:'Critical',warn:'Warning',soon:'This module is coming soon',n_dashboard:'Dashboard',n_orders:'Orders',n_planning:'Planning',n_materials:'Materials',n_production:'Production',n_quality:'Quality',n_inventory:'Inventory',n_finishing:'Finishing',n_shipment:'Shipment',n_costing:'Costing',n_analytics:'Analytics',n_settings:'Settings',tag:'Smart Factory. Smarter Business.',h1:'Complete Textile &amp; Garments Management Solution',sub:'From Order to Delivery — All in One Platform',
 f1:'Order<br>Management',f2:'Production<br>Monitoring',f3:'Quality<br>Control',f4:'Inventory<br>Management',f5:'Business<br>Analytics',
 slogan:'Drive Efficiency <i>•</i> Ensure Quality <i>•</i> Grow Together',tag2:'Textile<span>|</span>Garments<span>|</span>Beyond',
-wel:'Welcome Back!',wsub:'Sign in to continue your journey',user:'Username / Email',pass:'Password',rem:'Remember Me',forgot:'Forgot Password?',login:'Login',
-or:'Or continue with',google:'Continue with Google',online:'System Online',secure:'Secure • Reliable • Scalable',copy:'© 2026 TexNext ERP. All rights reserved.',
-out:'Sign out',hi:'Welcome, ',need:'Please enter username and password',gsetup:'Set GOOGLE_CLIENT_ID in the file to enable Google login',gload:'Google service not loaded. Check internet and open via http(s)',gfail:'Google sign-in failed or was cancelled',fp:'Password reset: contact your system admin'},
-bn:{tag:'স্মার্ট ফ্যাক্টরি। স্মার্টার বিজনেস।',h1:'সম্পূর্ণ টেক্সটাইল ও গার্মেন্টস ম্যানেজমেন্ট সলিউশন',sub:'অর্ডার থেকে ডেলিভারি — সবকিছু এক প্ল্যাটফর্মে',
+wel:'Welcome Back!',wsub:'Sign in to continue your journey',user:'ID',pass:'Password',rem:'Remember Me',login:'Login',
+online:'System Online',secure:'Secure • Reliable • Scalable',copy:'© 2026 TexNext ERP. All rights reserved.',
+out:'Sign out',hi:'Welcome, ',need:'Enter ID and password',bad:'Wrong ID or password'},
+bn:{help:'সহায়তা',search:'খুঁজুন...',ov:'এক্সিকিউটিভ ওভারভিউ',k1:'অর্ডার',k2:'প্রোডাকশন',k3:'কোয়ালিটি',pvp:'প্রোডাকশন বনাম প্ল্যান',actual:'প্রকৃত',plan:'প্ল্যান ১০০%',issues:'গুরুতর সমস্যা',i1:'অর্ডার #125 বিলম্বিত',i2:'ফেব্রিক সংকট',i3:'কোয়ালিটি রিজেক্ট',crit:'জরুরি',warn:'সতর্কতা',soon:'এই মডিউল শীঘ্রই আসছে',n_dashboard:'ড্যাশবোর্ড',n_orders:'অর্ডার',n_planning:'প্ল্যানিং',n_materials:'ম্যাটেরিয়ালস',n_production:'প্রোডাকশন',n_quality:'কোয়ালিটি',n_inventory:'ইনভেন্টরি',n_finishing:'ফিনিশিং',n_shipment:'শিপমেন্ট',n_costing:'কস্টিং',n_analytics:'অ্যানালিটিক্স',n_settings:'সেটিংস',tag:'স্মার্ট ফ্যাক্টরি। স্মার্টার বিজনেস।',h1:'সম্পূর্ণ টেক্সটাইল ও গার্মেন্টস ম্যানেজমেন্ট সলিউশন',sub:'অর্ডার থেকে ডেলিভারি — সবকিছু এক প্ল্যাটফর্মে',
 f1:'অর্ডার<br>ম্যানেজমেন্ট',f2:'প্রোডাকশন<br>মনিটরিং',f3:'কোয়ালিটি<br>কন্ট্রোল',f4:'ইনভেন্টরি<br>ম্যানেজমেন্ট',f5:'বিজনেস<br>অ্যানালিটিক্স',
 slogan:'দক্ষতা বাড়ান <i>•</i> মান নিশ্চিত করুন <i>•</i> একসাথে এগিয়ে চলুন',tag2:'টেক্সটাইল<span>|</span>গার্মেন্টস<span>|</span>আরও অনেক কিছু',
-wel:'স্বাগতম!',wsub:'আপনার যাত্রা চালিয়ে যেতে সাইন ইন করুন',user:'ইউজারনেম / ইমেইল',pass:'পাসওয়ার্ড',rem:'আমাকে মনে রাখুন',forgot:'পাসওয়ার্ড ভুলে গেছেন?',login:'লগইন',
-or:'অথবা চালিয়ে যান',google:'Google দিয়ে চালিয়ে যান',online:'সিস্টেম অনলাইন',secure:'নিরাপদ • নির্ভরযোগ্য • স্কেলেবল',copy:'© ২০২৬ TexNext ERP. সর্বস্বত্ব সংরক্ষিত।',
-out:'সাইন আউট',hi:'স্বাগতম, ',need:'ইউজারনেম ও পাসওয়ার্ড দিন',gsetup:'Google লগইন চালু করতে ফাইলে GOOGLE_CLIENT_ID বসান',gload:'Google সার্ভিস লোড হয়নি। ইন্টারনেট চেক করুন এবং http(s) এ খুলুন',gfail:'Google সাইন-ইন হয়নি বা বাতিল হয়েছে',fp:'পাসওয়ার্ড রিসেট: সিস্টেম অ্যাডমিনের সাথে যোগাযোগ করুন'}};
+wel:'স্বাগতম!',wsub:'আপনার যাত্রা চালিয়ে যেতে সাইন ইন করুন',user:'আইডি',pass:'পাসওয়ার্ড',rem:'আমাকে মনে রাখুন',login:'লগইন',
+online:'সিস্টেম অনলাইন',secure:'নিরাপদ • নির্ভরযোগ্য • স্কেলেবল',copy:'© ২০২৬ TexNext ERP. সর্বস্বত্ব সংরক্ষিত।',
+out:'সাইন আউট',hi:'স্বাগতম, ',need:'আইডি ও পাসওয়ার্ড দিন',bad:'ভুল আইডি বা পাসওয়ার্ড'}};
 const $=id=>document.getElementById(id);
 const st={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
-let lang=st.get('tx_lang')||'en';
-function t(k){return T[lang][k]}
+let lang=st.get('tx_lang')||'en',user=st.get('tx_user')?{name:st.get('tx_user')}:null,remember=true;
+const t=k=>T[lang][k];
+const NAV=[['dashboard','M3 3h8v8H3zM13 3h8v5h-8zM13 10h8v11h-8zM3 13h8v8H3z'],['orders','M2 3h3l2.5 12h11L21 7H6'],['planning','M4 5h16v16H4zM4 10h16M9 3v4M15 3v4'],['materials','M12 2l9 5v10l-9 5-9-5V7zM3 7l9 5 9-5M12 12v10'],['production','M2 21V10l5 3V8l5 3V5h3v6l2-1V3h3v18z'],['quality','M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5zM8 12l3 3 5-6'],['inventory','M12 3l9 5-9 5-9-5zM3 13l9 5 9-5'],['finishing','M12 3l2.2 5.5L20 10l-5.8 1.5L12 17l-2.2-5.5L4 10l5.8-1.5z'],['shipment','M2 6h12v10H2zM14 9h4l4 4v3h-8zM6 19h.01M18 19h.01'],['costing','M12 2v20M17 6H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6'],['analytics','M4 20V13M10 20V9M16 20v-6M22 20V4'],['settings','M12 15a3 3 0 100-6 3 3 0 000 6zM12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2']];
+$('nav').innerHTML=NAV.map(([k,d])=>`<a data-nav="${k}" class="${k==='dashboard'?'on ':''}${k==='settings'?'set':''}"><svg viewBox="0 0 24 24"><path d="${d}"/></svg><span data-i18n="n_${k}">${k}</span></a>`).join('');
+document.querySelectorAll('[data-nav]').forEach(a=>a.onclick=()=>{document.querySelectorAll('[data-nav]').forEach(x=>x.classList.remove('on'));a.classList.add('on');
+ const k=a.dataset.nav;$('v-dashboard').style.display=k==='dashboard'?'block':'none';$('v-other').style.display=k==='dashboard'?'none':'block';
+ if(k!=='dashboard'){$('ovName').textContent=a.querySelector('span').textContent.toUpperCase()}});
+
 function setLang(l){lang=l;st.set('tx_lang',l);document.documentElement.lang=l;
  document.querySelectorAll('[data-i18n]').forEach(e=>e.innerHTML=T[l][e.dataset.i18n]);
  document.querySelectorAll('[data-ph]').forEach(e=>e.placeholder=T[l][e.dataset.ph]);
- document.querySelectorAll('[data-l]').forEach(e=>e.classList.toggle('on',e.dataset.l===l));
- renderSession()}
+ document.querySelectorAll('[data-l]').forEach(e=>e.classList.toggle('on',e.dataset.l===l));renderSession()}
 document.querySelectorAll('[data-l]').forEach(e=>e.onclick=()=>setLang(e.dataset.l));
-let tm;function toast(m){const e=$('toast');e.textContent=m;e.classList.add('show');clearTimeout(tm);tm=setTimeout(()=>e.classList.remove('show'),3500)}
-// show/hide password
+let tm;function toast(m){const e=$('toast');e.textContent=m;e.classList.add('show');clearTimeout(tm);tm=setTimeout(()=>e.classList.remove('show'),3000)}
 $('eye').onclick=()=>{const p=$('pw');p.type=p.type==='password'?'text':'password'};
-// remember me
-let remember=true;$('chk').onclick=e=>{e.preventDefault();remember=!remember;$('box').classList.toggle('off',!remember)};
-$('forgot').onclick=e=>{e.preventDefault();toast(t('fp'))};
-// session
-let user=null;try{user=JSON.parse(st.get('tx_user')||'null')}catch(e){}
-function renderSession(){const s=$('session');if(!user){s.classList.remove('show');return}
- s.classList.add('show');const av=$('av');
- if(user.pic){av.style.backgroundImage='url('+user.pic+')';av.textContent=''}else{av.style.backgroundImage='none';av.textContent=(user.name||'U')[0].toUpperCase()}
- $('sHi').textContent=t('hi')+user.name+'!';$('sMail').textContent=user.email||''}
-function signIn(u){user=u;if(remember)st.set('tx_user',JSON.stringify(u));renderSession()}
-$('out').onclick=()=>{user=null;st.del('tx_user');$('pw').value='';renderSession()};
-// email/password (front-end demo – real check এর জন্য backend/API লাগবে)
-function doLogin(){const n=$('un').value.trim(),p=$('pw').value;if(!n||!p){toast(t('need'));return}signIn({name:n.includes('@')?n.split('@')[0]:n,email:n.includes('@')?n:''})}
-$('loginBtn').onclick=doLogin;[$('un'),$('pw')].forEach(e=>e.addEventListener('keydown',ev=>{if(ev.key==='Enter')doLogin()}));
-// Google login
-let tc;
-function initG(){if(!(window.google&&google.accounts&&google.accounts.oauth2))return false;
- if(!tc)tc=google.accounts.oauth2.initTokenClient({client_id:GOOGLE_CLIENT_ID,scope:'openid email profile',
-  callback:async r=>{if(r.error||!r.access_token){toast(t('gfail'));return}
-   try{const u=await(await fetch('https://www.googleapis.com/oauth2/v3/userinfo',{headers:{Authorization:'Bearer '+r.access_token}})).json();
-    signIn({name:u.name||u.email,email:u.email,pic:u.picture})}catch(e){toast(t('gfail'))}},
-  error_callback:()=>toast(t('gfail'))});return true}
-$('gbtn').onclick=()=>{if(GOOGLE_CLIENT_ID.startsWith('YOUR_')){toast(t('gsetup'));return}
- if(!initG()){toast(t('gload'));return}tc.requestAccessToken({prompt:'select_account'})};
+$('chk').onclick=e=>{e.preventDefault();remember=!remember;$('box').classList.toggle('off',!remember)};
+function renderSession(){const d=$('dash');d.classList.toggle('show',!!user);document.body.style.overflow=user?'hidden':'';if(user){$('un2').textContent=user.name;$('ua').textContent=user.name[0].toUpperCase()}}
+function submit(){const id=$('un').value.trim(),pw=$('pw').value;
+ if(!id||!pw){toast(t('need'));return}
+ if(id.toLowerCase()===USER_ID.toLowerCase()&&pw===USER_PASS){user={name:USER_ID};if(remember)st.set('tx_user',USER_ID);renderSession()}
+ else toast(t('bad'))}
+$('loginBtn').onclick=submit;[$('un'),$('pw')].forEach(e=>e.addEventListener('keydown',ev=>{if(ev.key==='Enter')submit()}));
+$('out').onclick=()=>{user=null;st.del('tx_user');$('un').value='';$('pw').value='';renderSession()};
 setLang(lang);
 </script>
 </body>
