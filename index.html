@@ -300,7 +300,9 @@ function renderDash(){const g=(k,c)=>SUM('production|'+k,c),pc=(DB['production|D
  v=[(DB['orders|Sales Orders']||[]).length,pc,ql],kv=document.querySelectorAll('.kv'),ks=document.querySelectorAll('.ks span');
  v.forEach((x,i)=>{kv[i].textContent=i?x+'%':x;ks[i].style.width=(i?Math.min(100,x):Math.min(100,x*10))+'%'});
  document.querySelector('.bar span').style.width=Math.min(100,pc)+'%';document.querySelector('.bar span').textContent=pc+'%';
- const pt=$('ptype');pt.value=st.get('tx_pt')||'g';$('flow').innerHTML=FLOW[pt.value].split(',').map(x=>`<span>${x}</span>`).join('<i>→</i>');
+ const pt=$('ptype');pt.value=st.get('tx_pt')||'g';const W={};(DB['production|WIP']||[]).forEach(r=>{const p=String(r.Process||'').trim().toLowerCase();W[p]=(W[p]||0)+(+r.In||0)-(+r.Out||0)});
+ const sg=FLOW[pt.value].split(','),mx=Math.max(0,...sg.map(x=>W[x.toLowerCase()]||0));
+ $('flow').innerHTML=sg.map(x=>{const w=W[x.toLowerCase()]||0;return `<span title="WIP" style="${w&&w===mx?'background:#fde4e4;color:#c2262b':''}">${x}${w?' · '+fmt(w):''}</span>`}).join('<i>→</i>');
  pt.onchange=()=>{st.set('tx_pt',pt.value);renderDash()}}
 $('nav').innerHTML=NAV.map(([k,d])=>{const M=TREE[k];return `<a data-nav="${k}" class="${k==='dashboard'?'on ':''}${k==='settings'?'set':''}"><svg viewBox="0 0 24 24"><path d="${d}"/></svg><span data-i18n="n_${k}">${k}</span>${M?'<i class="ch">▸</i>':''}</a>`+(M?`<div class="sub" id="sub_${k}">${Object.keys(M).map(n=>`<a data-sub="${k}|${n}">${n}</a>`).join('')}</div>`:'')}).join('');
 const clr=()=>document.querySelectorAll('.sb a').forEach(x=>x.classList.remove('on'));
