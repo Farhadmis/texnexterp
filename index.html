@@ -103,6 +103,14 @@ footer div{display:flex;align-items:center;gap:14px}
 .tg{margin-left:auto;font-style:normal;font-size:12.5px;font-weight:600;padding:4px 12px;border-radius:12px}.tg.r{background:#fde4e4;color:#c2262b}.tg.o{background:#fdebdc;color:#b4540f}
 .soon{color:var(--muted);font-size:17px;text-align:center;padding:70px 20px}
 @media(max-width:860px){.sb{width:62px;padding:14px 8px}.sb a span{display:none}.sb a{justify-content:center;padding:12px}.mn{padding:20px}.kpis{grid-template-columns:1fr}.hp,.sr{display:none}.lg{min-width:0}}
+.sb .ch{margin-left:auto;font-style:normal;font-size:11px;opacity:.5;transition:.15s}.sb a.open .ch{transform:rotate(90deg)}
+.sub{display:none;margin:0 0 6px 22px;border-left:2px solid #e3eaf6;padding-left:6px}.sub.open{display:block}.sb .sub a{padding:8px 12px;font-size:14px;margin:0}
+.sh{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px}.sh .ov{margin:0!important}
+.act{display:flex;gap:8px;flex-wrap:wrap}.act button,.up{border:1px solid #cfdcf1;background:#fff;color:var(--navy);border-radius:10px;padding:9px 14px;font:600 13.5px 'Inter',sans-serif;cursor:pointer}.act button:first-child{background:var(--blue);color:#fff;border-color:var(--blue)}.up{background:#e3eefd}
+.tw{padding:0;overflow:auto;margin-top:0}table{border-collapse:collapse;width:100%;font-size:14px}th{background:#f4f8fe;text-align:left;padding:11px 12px;font-size:12.5px;color:var(--muted);white-space:nowrap}
+td{padding:4px 6px;border-top:1px solid #eef2f9}td input{width:100%;min-width:92px;border:1px solid transparent;border-radius:6px;padding:7px 8px;font:inherit;background:transparent}td input:focus{border-color:var(--blue);background:#fff;outline:0}
+.fc{background:#f6faff;font-weight:600;padding:8px 12px;color:#0a4fb8;white-space:nowrap}td b{cursor:pointer;color:#c2262b;padding:0 8px}tfoot td{font-weight:700;background:#f4f8fe;padding:10px 12px;color:var(--navy)}
+.fl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.fl span{background:#e3eefd;color:var(--blue);font-weight:600;padding:10px 18px;border-radius:24px}.fl i{color:#8a97ad;font-style:normal}#ptype{margin-left:14px;font:500 14px 'Inter',sans-serif;padding:6px 10px;border-radius:8px;border:1px solid #cfdcf1}
 </style>
 </head>
 <body>
@@ -170,10 +178,11 @@ footer div{display:flex;align-items:center;gap:14px}
       <div id="v-dashboard">
         <h1 class="ov" data-i18n="ov">EXECUTIVE OVERVIEW</h1>
         <div class="kpis">
-          <div class="kc"><div class="kl" data-i18n="k1">Orders</div><div class="kv">125</div><div class="ks"><span style="width:78%"></span></div></div>
-          <div class="kc"><div class="kl" data-i18n="k2">Production</div><div class="kv">91%</div><div class="ks"><span style="width:91%"></span></div></div>
-          <div class="kc"><div class="kl" data-i18n="k3">Quality</div><div class="kv">98%</div><div class="ks"><span class="g" style="width:98%"></span></div></div>
+          <div class="kc"><div class="kl" data-i18n="k1">Orders</div><div class="kv">0</div><div class="ks"><span style="width:78%"></span></div></div>
+          <div class="kc"><div class="kl" data-i18n="k2">Production</div><div class="kv">0</div><div class="ks"><span style="width:91%"></span></div></div>
+          <div class="kc"><div class="kl" data-i18n="k3">Quality</div><div class="kv">0</div><div class="ks"><span class="g" style="width:98%"></span></div></div>
         </div>
+        <div class="pn"><div class="pt"><span data-i18n="flow">Process Flow</span><select id="ptype"><option value="g">Garments</option><option value="k">Knit / Textile</option><option value="w">Woven</option></select></div><div class="fl" id="flow"></div></div>
         <div class="pn"><div class="pt" data-i18n="pvp">Production vs Plan</div>
           <div class="bar"><span style="width:91%">91%</span></div>
           <div class="bl"><span data-i18n="actual">Actual</span><span data-i18n="plan">Plan 100%</span></div></div>
@@ -184,7 +193,7 @@ footer div{display:flex;align-items:center;gap:14px}
             <li><i class="dt r"></i><span data-i18n="i3">Quality rejection</span><em class="tg r" data-i18n="crit">Critical</em></li>
           </ul></div>
       </div>
-      <div id="v-other" style="display:none"><h1 class="ov" id="ovName"></h1><div class="pn soon" data-i18n="soon">This module is coming soon</div></div>
+      <div id="v-sheet" style="display:none"></div>
     </main>
   </div>
 </div>
@@ -193,16 +202,17 @@ footer div{display:flex;align-items:center;gap:14px}
   <div><svg width="26" height="28" viewBox="0 0 24 26" fill="none" stroke="#4d93ff" stroke-width="2"><path d="M12 2l9 3v7c0 5-4 9-9 11-5-2-9-6-9-11V5z"/><path d="M8 12l3 3 5-6"/></svg><span data-i18n="secure">Secure • Reliable • Scalable</span></div>
   <span data-i18n="copy">© 2026 TexNext ERP. All rights reserved.</span>
 </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 const USER_ID='Farhad',USER_PASS='1234';
 const T={
-en:{help:'Help',search:'Search...',ov:'EXECUTIVE OVERVIEW',k1:'Orders',k2:'Production',k3:'Quality',pvp:'Production vs Plan',actual:'Actual',plan:'Plan 100%',issues:'Critical Issues',i1:'Order #125 delayed',i2:'Fabric shortage',i3:'Quality rejection',crit:'Critical',warn:'Warning',soon:'This module is coming soon',n_dashboard:'Dashboard',n_orders:'Orders',n_planning:'Planning',n_materials:'Materials',n_production:'Production',n_quality:'Quality',n_inventory:'Inventory',n_finishing:'Finishing',n_shipment:'Shipment',n_costing:'Costing',n_analytics:'Analytics',n_settings:'Settings',tag:'Smart Factory. Smarter Business.',h1:'Complete Textile &amp; Garments Management Solution',sub:'From Order to Delivery — All in One Platform',
+en:{help:'Help',flow:'Process Flow',next:'Next stage: this module is built in the next step',search:'Search...',ov:'EXECUTIVE OVERVIEW',k1:'Orders',k2:'Production',k3:'Quality',pvp:'Production vs Plan',actual:'Actual',plan:'Plan 100%',issues:'Critical Issues',i1:'Order #125 delayed',i2:'Fabric shortage',i3:'Quality rejection',crit:'Critical',warn:'Warning',soon:'This module is coming soon',n_dashboard:'Dashboard',n_orders:'Orders',n_planning:'Planning',n_materials:'Materials',n_production:'Production',n_quality:'Quality',n_inventory:'Inventory',n_finishing:'Finishing',n_shipment:'Shipment',n_costing:'Costing',n_analytics:'Analytics',n_settings:'Settings',tag:'Smart Factory. Smarter Business.',h1:'Complete Textile &amp; Garments Management Solution',sub:'From Order to Delivery — All in One Platform',
 f1:'Order<br>Management',f2:'Production<br>Monitoring',f3:'Quality<br>Control',f4:'Inventory<br>Management',f5:'Business<br>Analytics',
 slogan:'Drive Efficiency <i>•</i> Ensure Quality <i>•</i> Grow Together',tag2:'Textile<span>|</span>Garments<span>|</span>Beyond',
 wel:'Welcome Back!',wsub:'Sign in to continue your journey',user:'ID',pass:'Password',rem:'Remember Me',login:'Login',
 online:'System Online',secure:'Secure • Reliable • Scalable',copy:'© 2026 TexNext ERP. All rights reserved.',
 out:'Sign out',hi:'Welcome, ',need:'Enter ID and password',bad:'Wrong ID or password'},
-bn:{help:'সহায়তা',search:'খুঁজুন...',ov:'এক্সিকিউটিভ ওভারভিউ',k1:'অর্ডার',k2:'প্রোডাকশন',k3:'কোয়ালিটি',pvp:'প্রোডাকশন বনাম প্ল্যান',actual:'প্রকৃত',plan:'প্ল্যান ১০০%',issues:'গুরুতর সমস্যা',i1:'অর্ডার #125 বিলম্বিত',i2:'ফেব্রিক সংকট',i3:'কোয়ালিটি রিজেক্ট',crit:'জরুরি',warn:'সতর্কতা',soon:'এই মডিউল শীঘ্রই আসছে',n_dashboard:'ড্যাশবোর্ড',n_orders:'অর্ডার',n_planning:'প্ল্যানিং',n_materials:'ম্যাটেরিয়ালস',n_production:'প্রোডাকশন',n_quality:'কোয়ালিটি',n_inventory:'ইনভেন্টরি',n_finishing:'ফিনিশিং',n_shipment:'শিপমেন্ট',n_costing:'কস্টিং',n_analytics:'অ্যানালিটিক্স',n_settings:'সেটিংস',tag:'স্মার্ট ফ্যাক্টরি। স্মার্টার বিজনেস।',h1:'সম্পূর্ণ টেক্সটাইল ও গার্মেন্টস ম্যানেজমেন্ট সলিউশন',sub:'অর্ডার থেকে ডেলিভারি — সবকিছু এক প্ল্যাটফর্মে',
+bn:{help:'সহায়তা',flow:'প্রসেস ফ্লো',next:'পরের ধাপে এই মডিউল তৈরি হবে',search:'খুঁজুন...',ov:'এক্সিকিউটিভ ওভারভিউ',k1:'অর্ডার',k2:'প্রোডাকশন',k3:'কোয়ালিটি',pvp:'প্রোডাকশন বনাম প্ল্যান',actual:'প্রকৃত',plan:'প্ল্যান ১০০%',issues:'গুরুতর সমস্যা',i1:'অর্ডার #125 বিলম্বিত',i2:'ফেব্রিক সংকট',i3:'কোয়ালিটি রিজেক্ট',crit:'জরুরি',warn:'সতর্কতা',soon:'এই মডিউল শীঘ্রই আসছে',n_dashboard:'ড্যাশবোর্ড',n_orders:'অর্ডার',n_planning:'প্ল্যানিং',n_materials:'ম্যাটেরিয়ালস',n_production:'প্রোডাকশন',n_quality:'কোয়ালিটি',n_inventory:'ইনভেন্টরি',n_finishing:'ফিনিশিং',n_shipment:'শিপমেন্ট',n_costing:'কস্টিং',n_analytics:'অ্যানালিটিক্স',n_settings:'সেটিংস',tag:'স্মার্ট ফ্যাক্টরি। স্মার্টার বিজনেস।',h1:'সম্পূর্ণ টেক্সটাইল ও গার্মেন্টস ম্যানেজমেন্ট সলিউশন',sub:'অর্ডার থেকে ডেলিভারি — সবকিছু এক প্ল্যাটফর্মে',
 f1:'অর্ডার<br>ম্যানেজমেন্ট',f2:'প্রোডাকশন<br>মনিটরিং',f3:'কোয়ালিটি<br>কন্ট্রোল',f4:'ইনভেন্টরি<br>ম্যানেজমেন্ট',f5:'বিজনেস<br>অ্যানালিটিক্স',
 slogan:'দক্ষতা বাড়ান <i>•</i> মান নিশ্চিত করুন <i>•</i> একসাথে এগিয়ে চলুন',tag2:'টেক্সটাইল<span>|</span>গার্মেন্টস<span>|</span>আরও অনেক কিছু',
 wel:'স্বাগতম!',wsub:'আপনার যাত্রা চালিয়ে যেতে সাইন ইন করুন',user:'আইডি',pass:'পাসওয়ার্ড',rem:'আমাকে মনে রাখুন',login:'লগইন',
@@ -213,10 +223,71 @@ const st={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k
 let lang=st.get('tx_lang')||'en',user=st.get('tx_user')?{name:st.get('tx_user')}:null,remember=true;
 const t=k=>T[lang][k];
 const NAV=[['dashboard','M3 3h8v8H3zM13 3h8v5h-8zM13 10h8v11h-8zM3 13h8v8H3z'],['orders','M2 3h3l2.5 12h11L21 7H6'],['planning','M4 5h16v16H4zM4 10h16M9 3v4M15 3v4'],['materials','M12 2l9 5v10l-9 5-9-5V7zM3 7l9 5 9-5M12 12v10'],['production','M2 21V10l5 3V8l5 3V5h3v6l2-1V3h3v18z'],['quality','M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5zM8 12l3 3 5-6'],['inventory','M12 3l9 5-9 5-9-5zM3 13l9 5 9-5'],['finishing','M12 3l2.2 5.5L20 10l-5.8 1.5L12 17l-2.2-5.5L4 10l5.8-1.5z'],['shipment','M2 6h12v10H2zM14 9h4l4 4v3h-8zM6 19h.01M18 19h.01'],['costing','M12 2v20M17 6H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6'],['analytics','M4 20V13M10 20V9M16 20v-6M22 20V4'],['settings','M12 15a3 3 0 100-6 3 3 0 000 6zM12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2']];
-$('nav').innerHTML=NAV.map(([k,d])=>`<a data-nav="${k}" class="${k==='dashboard'?'on ':''}${k==='settings'?'set':''}"><svg viewBox="0 0 24 24"><path d="${d}"/></svg><span data-i18n="n_${k}">${k}</span></a>`).join('');
-document.querySelectorAll('[data-nav]').forEach(a=>a.onclick=()=>{document.querySelectorAll('[data-nav]').forEach(x=>x.classList.remove('on'));a.classList.add('on');
- const k=a.dataset.nav;$('v-dashboard').style.display=k==='dashboard'?'block':'none';$('v-other').style.display=k==='dashboard'?'none':'block';
- if(k!=='dashboard'){$('ovName').textContent=a.querySelector('span').textContent.toUpperCase()}});
+
+const N=null,TREE={
+orders:{'Customers / Buyers':'Buyer Code|Buyer Name|Country|Contact Person|Email','Sales Orders':'Order No|Buyer|Style|Qty#|Unit Price#|Value=Qty*UnitPrice|Ship Date|Status','Order Items / Style':'Style|Description|Color|Size Range|SMV#|Order No','Order Status':'Order No|Order Qty#|Cut Qty#|Sewn Qty#|Packed Qty#|Shipped Qty#|Progress Pct=OrderQty?Math.round(ShippedQty/OrderQty*1000)/10:0|Status','Order Tracking':'Order No|Stage|Location|Updated On|Remarks',Documents:'Order No|Document|Ref No|Date|Status'},
+planning:{'T&A / Order Calendar':'Order No|Task|Plan Date|Actual Date|Delay Days=ActualDate&&PlanDate?Math.round((new Date(ActualDate)-new Date(PlanDate))/864e5):0','Production Plan':'Order No|Line|Start Date|End Date|Plan Qty#|Days=StartDate&&EndDate?Math.round((new Date(EndDate)-new Date(StartDate))/864e5)+1:0|Daily Target=Days?Math.round(PlanQty/Days):0','Capacity Planning':'Line|Machines#|Operators#|SMV#|Eff Pct#|Hours#|Daily Capacity=SMV?Math.round(Operators*Hours*60*EffPct/100/SMV):0','Material Requirement':'@materials|Material Requirement','Line / Machine Allocation':'Order No|Line|Machine|From Date|To Date|Qty#'},
+materials:{'Material Master':'Code|Material|Type|Unit|Std Price#|Supplier',BOM:'Style|Material|Unit|Consump#|Wastage Pct#|Net Consump=Math.round(Consump*(1+WastagePct/100)*1000)/1000','Material Requirement':'Style|Material|Consump#|Wastage Pct#|Order Qty=LK("orders/Sales Orders","Style",Style,"Qty")|Required=Math.round(OrderQty*Consump*(1+WastagePct/100)*100)/100','Purchase Requisition':'PR No|Material|Qty#|Required Date|Status','Purchase Order':'PO No|Supplier|Material|Qty#|Rate#|Amount=Qty*Rate|Delivery Date|Status','GRN / Receiving':'GRN No|PO No|Material|Ordered Qty#|Received Qty#|Balance=OrderedQty-ReceivedQty|Date','Material Issue':'Issue No|Order No|Material|Qty#|Date|Issued To','Material Return':'Return No|Order No|Material|Qty#|Reason|Date'},
+production:{'Production Plan':'@planning|Production Plan','Daily Production':'Date|Order No|Line|Target#|Output#|Eff Pct=Target?Math.round(Output/Target*1000)/10:0|Gap=Target-Output','Line / Machine':'Line|Machines#|Running Machines#|Operators#|Utilization Pct=Machines?Math.round(RunningMachines/Machines*1000)/10:0','Input / Output':'Date|Order No|Input#|Output#|Balance=Input-Output',WIP:'Order No|Process|In#|Out#|WIP=In-Out',Downtime:'Date|Line|Reason|Start Time|End Time|Minutes=Math.max(0,H(EndTime)-H(StartTime))','Rework / Rejection':'Date|Order No|Line|Checked#|Rework#|Reject#|Defect Pct=Checked?Math.round((Rework+Reject)/Checked*1000)/10:0',Efficiency:'Date|Line|Output#|SMV#|Operators#|Hours#|Eff Pct=Operators*Hours?Math.round(Output*SMV/(Operators*Hours*60)*1000)/10:0'},
+quality:{Inspection:N,Defect:N,Rejection:N,Rework:N,'Quality Result':N,CAPA:N},
+inventory:{'Raw Material':N,WIP:N,'Finished Goods':N,'Stock Transfer':N,'Stock Adjustment':N,'Stock Ledger':N},
+finishing:{'Finishing Plan':N,'Finishing Input':N,'Finishing Output':N,Folding:N,Packing:N,Carton:N},
+shipment:{'Shipment Plan':N,'Packing List':N,'Carton / Shipment':N,Documents:N,Tracking:N},
+costing:{'Order Costing':N,'Material Cost':N,'Production Cost':N,Overhead:N,'Logistics Cost':N,Profitability:N},
+analytics:{Executive:N,Orders:N,Production:N,Quality:N,Inventory:N,Delivery:N,'Cost & Profitability':N}};
+const FLOW={g:'Cutting,Sewing,Finishing,Packing',k:'Knitting,Dyeing,Finishing,Packing',w:'Weaving,Dyeing/Finishing,Cutting,Sewing,Packing'};
+let DB={};try{DB=JSON.parse(st.get('tx_db')||'{}')}catch(e){}
+if(!Object.keys(DB).length){DB={'orders|Sales Orders':[{OrderNo:'SO-101',Buyer:'Decathlon',Style:'ST-01',Qty:5000,UnitPrice:4.5,ShipDate:'2026-12-10',Status:'Running'},{OrderNo:'SO-102',Buyer:'H&M',Style:'ST-02',Qty:8000,UnitPrice:3.8,ShipDate:'2026-12-25',Status:'Planned'}],
+'materials|BOM':[{Style:'ST-01',Material:'Fabric',Unit:'Yds',Consump:1.2,WastagePct:5}],'materials|Material Requirement':[{Style:'ST-01',Material:'Fabric',Consump:1.2,WastagePct:5}],
+'production|Daily Production':[{Date:'2026-11-01',OrderNo:'SO-101',Line:'L1',Target:1000,Output:910}],'production|Rework / Rejection':[{Date:'2026-11-01',OrderNo:'SO-101',Line:'L1',Checked:1000,Rework:12,Reject:8}]}}
+const save=()=>st.set('tx_db',JSON.stringify(DB));
+const SUM=(k,c)=>(DB[k]||[]).reduce((a,r)=>a+(+r[c]||0),0);
+const LK=(k,c,v,o)=>{const r=(DB[k.replace('/','|')]||[]).find(r=>r[c]==v);return r?+r[o]||0:0};
+const H=x=>{const[a,b]=(x||'0:0').split(':');return a*60+ +b};
+const colsOf=sp=>sp.split('|').map(c=>{const f=c.indexOf('='),n=f>-1?c.slice(0,f):c,label=n.replace(/#$/,'');return{label,v:label.replace(/[^A-Za-z0-9]/g,''),num:n.endsWith('#'),f:f>-1?c.slice(f+1):null}});
+function calc(cols,r){const o={};cols.forEach(c=>o[c.v]=c.f?0:c.num?+r[c.v]||0:r[c.v]||'');
+ cols.forEach(c=>{if(c.f){try{let v=new Function(...Object.keys(o),'LK','H','return '+c.f)(...Object.values(o),LK,H);o[c.v]=typeof v==='number'&&!isFinite(v)?0:v}catch(e){o[c.v]=0}}});return o}
+const fmt=v=>typeof v==='number'?v.toLocaleString(undefined,{maximumFractionDigits:2}):v;
+const show=v=>['v-dashboard','v-sheet'].forEach(i=>$(i).style.display=i===v?'block':'none');
+let cur=[];
+function openSub(mod,name){show('v-sheet');cur=[mod,name];let sp=TREE[mod][name],key=mod+'|'+name;
+ if(sp&&sp[0]==='@'){key=sp.slice(1);const[m,n]=key.split('|');sp=TREE[m][n]}
+ const b=$('v-sheet');b.dataset.key=key;b.dataset.sp=sp||'';
+ if(!sp){b.innerHTML=`<h1 class="ov">${name}</h1><div class="pn soon">${t('next')}</div>`;return}drawSheet()}
+function drawSheet(){const b=$('v-sheet'),key=b.dataset.key,cols=colsOf(b.dataset.sp),rows=DB[key]=DB[key]||[],cp=rows.map(r=>calc(cols,r));
+ const tot=c=>c.f?/Value|Amount|Required|Balance|Gap|WIP|Minutes/.test(c.label):c.num&&!/Pct|SMV|Price|Rate|Consump|Std/.test(c.label);
+ b.innerHTML=`<div class="sh"><h1 class="ov">${cur[1]}</h1><div class="act"><button data-a="add">+ Row</button><label class="up">⬆ Excel Upload<input type="file" id="xf" accept=".xlsx,.xls,.csv" hidden></label><button data-a="tpl">⬇ Template</button><button data-a="exp">⬇ Export</button><button data-a="clr">Clear</button></div></div>
+ <div class="pn tw"><table><thead><tr>${cols.map(c=>`<th>${c.label}${c.f?' ƒ':''}</th>`).join('')}<th></th></tr></thead><tbody>${rows.map((r,i)=>`<tr>${cols.map(c=>c.f?`<td class="fc">${fmt(cp[i][c.v])}</td>`:`<td><input data-i="${i}" data-c="${c.v}" type="${c.num?'number':'text'}" ${/Date$/.test(c.label)?'placeholder="YYYY-MM-DD"':''} value="${String(r[c.v]??'').replace(/"/g,'&quot;')}"></td>`).join('')}<td><b data-d="${i}">×</b></td></tr>`).join('')||`<tr><td colspan="99" class="soon" style="padding:30px">+ Row / ⬆ Excel</td></tr>`}</tbody>
+ <tfoot><tr>${cols.map((c,j)=>`<td>${j===0?'Total':tot(c)?fmt(cp.reduce((a,o)=>a+(+o[c.v]||0),0)):''}</td>`).join('')}<td></td></tr></tfoot></table></div>`;
+ b._cols=cols;b._rows=rows}
+$('v-sheet').addEventListener('change',e=>{const b=$('v-sheet'),x=e.target;
+ if(x.id==='xf'){const f=x.files[0];if(!f)return;if(!window.XLSX){toast('Excel library not loaded (check internet)');return}
+  const rd=new FileReader();rd.onload=ev=>{const wb=XLSX.read(ev.target.result,{type:'array',cellDates:true}),js=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:''}),map={};
+   b._cols.filter(c=>!c.f).forEach(c=>map[c.v.toLowerCase()]=c);let n=0;
+   js.forEach(j=>{const r={};Object.keys(j).forEach(h=>{const c=map[h.replace(/[^A-Za-z0-9]/g,'').toLowerCase()];if(c){let v=j[h];if(v instanceof Date)v=v.toISOString().slice(0,10);r[c.v]=v}});if(Object.keys(r).length){b._rows.push(r);n++}});
+   save();drawSheet();toast(n+' rows uploaded')};rd.readAsArrayBuffer(f)}
+ else if(x.dataset.c){b._rows[x.dataset.i][x.dataset.c]=x.value;save();drawSheet()}});
+$('v-sheet').addEventListener('click',e=>{const b=$('v-sheet'),a=e.target.dataset.a,d=e.target.dataset.d;
+ if(d!==undefined){b._rows.splice(+d,1);save();drawSheet()}
+ else if(a==='add'){b._rows.push({});save();drawSheet()}
+ else if(a==='clr'){if(confirm('Clear all rows?')){b._rows.length=0;save();drawSheet()}}
+ else if((a==='tpl'||a==='exp')&&window.XLSX){const cols=b._cols,aoa=a==='tpl'?[cols.filter(c=>!c.f).map(c=>c.label)]:[cols.map(c=>c.label),...b._rows.map(r=>{const o=calc(cols,r);return cols.map(c=>o[c.v])})];
+  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(aoa),'Sheet1');XLSX.writeFile(wb,cur[1].replace(/\W+/g,'_')+(a==='tpl'?'_template':'_export')+'.xlsx')}});
+function renderDash(){const g=(k,c)=>SUM('production|'+k,c),pc=(DB['production|Daily Production']||[]).length?Math.round(g('Daily Production','Output')/(g('Daily Production','Target')||1)*100):0,
+ ck=g('Rework / Rejection','Checked'),ql=ck?Math.round((100-(g('Rework / Rejection','Rework')+g('Rework / Rejection','Reject'))/ck*100)*10)/10:0,
+ v=[(DB['orders|Sales Orders']||[]).length,pc,ql],kv=document.querySelectorAll('.kv'),ks=document.querySelectorAll('.ks span');
+ v.forEach((x,i)=>{kv[i].textContent=i?x+'%':x;ks[i].style.width=(i?Math.min(100,x):Math.min(100,x*10))+'%'});
+ document.querySelector('.bar span').style.width=Math.min(100,pc)+'%';document.querySelector('.bar span').textContent=pc+'%';
+ const pt=$('ptype');pt.value=st.get('tx_pt')||'g';$('flow').innerHTML=FLOW[pt.value].split(',').map(x=>`<span>${x}</span>`).join('<i>→</i>');
+ pt.onchange=()=>{st.set('tx_pt',pt.value);renderDash()}}
+$('nav').innerHTML=NAV.map(([k,d])=>{const M=TREE[k];return `<a data-nav="${k}" class="${k==='dashboard'?'on ':''}${k==='settings'?'set':''}"><svg viewBox="0 0 24 24"><path d="${d}"/></svg><span data-i18n="n_${k}">${k}</span>${M?'<i class="ch">▸</i>':''}</a>`+(M?`<div class="sub" id="sub_${k}">${Object.keys(M).map(n=>`<a data-sub="${k}|${n}">${n}</a>`).join('')}</div>`:'')}).join('');
+const clr=()=>document.querySelectorAll('.sb a').forEach(x=>x.classList.remove('on'));
+document.querySelectorAll('[data-nav]').forEach(a=>a.onclick=()=>{const k=a.dataset.nav,M=TREE[k],sb=$('sub_'+k),was=sb&&sb.classList.contains('open');
+ clr();a.classList.add('on');document.querySelectorAll('.sub').forEach(x=>x.classList.remove('open'));document.querySelectorAll('.sb a.open').forEach(x=>x.classList.remove('open'));
+ if(k==='dashboard'){show('v-dashboard');renderDash()}else if(M){if(!was){sb.classList.add('open');a.classList.add('open')}const n=Object.keys(M)[0];sb.querySelector('a').classList.add('on');openSub(k,n)}
+ else{show('v-sheet');$('v-sheet').innerHTML=`<h1 class="ov">${a.textContent.toUpperCase()}</h1><div class="pn soon">${t('next')}</div>`}});
+document.querySelectorAll('[data-sub]').forEach(a=>a.onclick=()=>{const[k,n]=a.dataset.sub.split('|');clr();a.classList.add('on');const p=document.querySelector(`[data-nav=${k}]`);p.classList.add('on');openSub(k,n)});
+
 
 function setLang(l){lang=l;st.set('tx_lang',l);document.documentElement.lang=l;
  document.querySelectorAll('[data-i18n]').forEach(e=>e.innerHTML=T[l][e.dataset.i18n]);
@@ -226,7 +297,7 @@ document.querySelectorAll('[data-l]').forEach(e=>e.onclick=()=>setLang(e.dataset
 let tm;function toast(m){const e=$('toast');e.textContent=m;e.classList.add('show');clearTimeout(tm);tm=setTimeout(()=>e.classList.remove('show'),3000)}
 $('eye').onclick=()=>{const p=$('pw');p.type=p.type==='password'?'text':'password'};
 $('chk').onclick=e=>{e.preventDefault();remember=!remember;$('box').classList.toggle('off',!remember)};
-function renderSession(){const d=$('dash');d.classList.toggle('show',!!user);document.body.style.overflow=user?'hidden':'';if(user){$('un2').textContent=user.name;$('ua').textContent=user.name[0].toUpperCase()}}
+function renderSession(){const d=$('dash');d.classList.toggle('show',!!user);document.body.style.overflow=user?'hidden':'';if(user){renderDash();$('un2').textContent=user.name;$('ua').textContent=user.name[0].toUpperCase()}}
 function submit(){const id=$('un').value.trim(),pw=$('pw').value;
  if(!id||!pw){toast(t('need'));return}
  if(id.toLowerCase()===USER_ID.toLowerCase()&&pw===USER_PASS){user={name:USER_ID};if(remember)st.set('tx_user',USER_ID);renderSession()}
