@@ -167,7 +167,7 @@ td{padding:4px 6px;border-top:1px solid #eef2f9}td input{width:100%;min-width:92
     <div class="tr">
       <div class="lang2"><span data-l="en">EN</span><span class="sep">|</span><span data-l="bn">বাংলা</span></div>
       <button class="ib" title="Notifications"><svg width="22" height="22" viewBox="0 0 24 24" fill="#f5a524"><path d="M12 2a6 6 0 00-6 6v4l-2 4h16l-2-4V8a6 6 0 00-6-6zM9.5 19a2.5 2.5 0 005 0z"/></svg><i class="bd">3</i></button>
-      <span class="hp" data-i18n="help">Help</span>
+      <span class="hp" id="sync" style="font-size:13px;font-weight:600;color:var(--blue)"></span><span class="hp" data-i18n="help">Help</span>
       <div class="um" id="um"><span class="ua" id="ua">F</span><span id="un2">Farhad</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0b1f4d" stroke-width="3"><path d="M6 9l6 6 6-6"/></svg>
         <div class="dd"><button id="out" data-i18n="out">Sign out</button></div></div>
     </div>
@@ -203,19 +203,23 @@ td{padding:4px 6px;border-top:1px solid #eef2f9}td input{width:100%;min-width:92
   <span data-i18n="copy">© 2026 TexNext ERP. All rights reserved.</span>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
 const USER_ID='Farhad',USER_PASS='1234';
+const SB_URL='https://lxyvkjdllhlvblukraqs.supabase.co',SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx4eXZramRsbGhsdmJsdWtyYXFzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM2MTE5NjEsImV4cCI6MjEwOTE4Nzk2MX0._ThF6HUqhYp4Vr_hrVXqZG3_PUklFanJzJ6zWlu345g';
+let sb=null;try{sb=window.supabase.createClient(SB_URL,SB_KEY)}catch(e){}
+let CLOUD=false,ct;
 const T={
 en:{help:'Help',flow:'Process Flow',next:'Next stage: this module is built in the next step',search:'Search...',ov:'EXECUTIVE OVERVIEW',k1:'Orders',k2:'Production',k3:'Quality',pvp:'Production vs Plan',actual:'Actual',plan:'Plan 100%',issues:'Critical Issues',i1:'Order #125 delayed',i2:'Fabric shortage',i3:'Quality rejection',crit:'Critical',warn:'Warning',soon:'This module is coming soon',n_dashboard:'Dashboard',n_orders:'Orders',n_planning:'Planning',n_materials:'Materials',n_production:'Production',n_quality:'Quality',n_inventory:'Inventory',n_finishing:'Finishing',n_shipment:'Shipment',n_costing:'Costing',n_analytics:'Analytics',n_settings:'Settings',tag:'Smart Factory. Smarter Business.',h1:'Complete Textile &amp; Garments Management Solution',sub:'From Order to Delivery — All in One Platform',
 f1:'Order<br>Management',f2:'Production<br>Monitoring',f3:'Quality<br>Control',f4:'Inventory<br>Management',f5:'Business<br>Analytics',
 slogan:'Drive Efficiency <i>•</i> Ensure Quality <i>•</i> Grow Together',tag2:'Textile<span>|</span>Garments<span>|</span>Beyond',
-wel:'Welcome Back!',wsub:'Sign in to continue your journey',user:'ID',pass:'Password',rem:'Remember Me',login:'Login',
+wel:'Welcome Back!',wsub:'Sign in to continue your journey',user:'ID / Email',pass:'Password',rem:'Remember Me',login:'Login',
 online:'System Online',secure:'Secure • Reliable • Scalable',copy:'© 2026 TexNext ERP. All rights reserved.',
 out:'Sign out',hi:'Welcome, ',need:'Enter ID and password',bad:'Wrong ID or password'},
 bn:{help:'সহায়তা',flow:'প্রসেস ফ্লো',next:'পরের ধাপে এই মডিউল তৈরি হবে',search:'খুঁজুন...',ov:'এক্সিকিউটিভ ওভারভিউ',k1:'অর্ডার',k2:'প্রোডাকশন',k3:'কোয়ালিটি',pvp:'প্রোডাকশন বনাম প্ল্যান',actual:'প্রকৃত',plan:'প্ল্যান ১০০%',issues:'গুরুতর সমস্যা',i1:'অর্ডার #125 বিলম্বিত',i2:'ফেব্রিক সংকট',i3:'কোয়ালিটি রিজেক্ট',crit:'জরুরি',warn:'সতর্কতা',soon:'এই মডিউল শীঘ্রই আসছে',n_dashboard:'ড্যাশবোর্ড',n_orders:'অর্ডার',n_planning:'প্ল্যানিং',n_materials:'ম্যাটেরিয়ালস',n_production:'প্রোডাকশন',n_quality:'কোয়ালিটি',n_inventory:'ইনভেন্টরি',n_finishing:'ফিনিশিং',n_shipment:'শিপমেন্ট',n_costing:'কস্টিং',n_analytics:'অ্যানালিটিক্স',n_settings:'সেটিংস',tag:'স্মার্ট ফ্যাক্টরি। স্মার্টার বিজনেস।',h1:'সম্পূর্ণ টেক্সটাইল ও গার্মেন্টস ম্যানেজমেন্ট সলিউশন',sub:'অর্ডার থেকে ডেলিভারি — সবকিছু এক প্ল্যাটফর্মে',
 f1:'অর্ডার<br>ম্যানেজমেন্ট',f2:'প্রোডাকশন<br>মনিটরিং',f3:'কোয়ালিটি<br>কন্ট্রোল',f4:'ইনভেন্টরি<br>ম্যানেজমেন্ট',f5:'বিজনেস<br>অ্যানালিটিক্স',
 slogan:'দক্ষতা বাড়ান <i>•</i> মান নিশ্চিত করুন <i>•</i> একসাথে এগিয়ে চলুন',tag2:'টেক্সটাইল<span>|</span>গার্মেন্টস<span>|</span>আরও অনেক কিছু',
-wel:'স্বাগতম!',wsub:'আপনার যাত্রা চালিয়ে যেতে সাইন ইন করুন',user:'আইডি',pass:'পাসওয়ার্ড',rem:'আমাকে মনে রাখুন',login:'লগইন',
+wel:'স্বাগতম!',wsub:'আপনার যাত্রা চালিয়ে যেতে সাইন ইন করুন',user:'আইডি / ইমেইল',pass:'পাসওয়ার্ড',rem:'আমাকে মনে রাখুন',login:'লগইন',
 online:'সিস্টেম অনলাইন',secure:'নিরাপদ • নির্ভরযোগ্য • স্কেলেবল',copy:'© ২০২৬ TexNext ERP. সর্বস্বত্ব সংরক্ষিত।',
 out:'সাইন আউট',hi:'স্বাগতম, ',need:'আইডি ও পাসওয়ার্ড দিন',bad:'ভুল আইডি বা পাসওয়ার্ড'}};
 const $=id=>document.getElementById(id);
@@ -246,7 +250,11 @@ let DB={};try{DB=JSON.parse(st.get('tx_db')||'{}')}catch(e){}
 if(!Object.keys(DB).length){DB={'orders|Sales Orders':[{OrderNo:'SO-101',Buyer:'Decathlon',Style:'ST-01',Qty:5000,UnitPrice:4.5,ShipDate:'2026-12-10',Status:'Running'},{OrderNo:'SO-102',Buyer:'H&M',Style:'ST-02',Qty:8000,UnitPrice:3.8,ShipDate:'2026-12-25',Status:'Planned'}],
 'materials|BOM':[{Style:'ST-01',Material:'Fabric',Unit:'Yds',Consump:1.2,WastagePct:5}],'materials|Material Requirement':[{Style:'ST-01',Material:'Fabric',Consump:1.2,WastagePct:5}],
 'production|Daily Production':[{Date:'2026-11-01',OrderNo:'SO-101',Line:'L1',Target:1000,Output:910}],'production|Rework / Rejection':[{Date:'2026-11-01',OrderNo:'SO-101',Line:'L1',Checked:1000,Rework:12,Reject:8}]}}
-const save=()=>st.set('tx_db',JSON.stringify(DB));
+const save=()=>{st.set('tx_db',JSON.stringify(DB));if(CLOUD){clearTimeout(ct);ct=setTimeout(cloudSave,700)}};
+async function cloudSave(){setSync('...');const{error}=await sb.from('erp_data').upsert({id:'main',data:DB,updated_at:new Date().toISOString()});setSync(error?'err':'ok');if(error)toast(error.message)}
+function setSync(x){const e=$('sync');if(e)e.textContent=!CLOUD?'Local':x==='err'?'⚠ Sync error':x==='...'?'☁ Saving…':'☁ Synced'}
+async function cloudLogin(u){CLOUD=true;const{data}=await sb.from('erp_data').select('data').eq('id','main').maybeSingle();
+ if(data&&data.data&&Object.keys(data.data).length)DB=data.data;else await cloudSave();user={name:(u.email||'user').split('@')[0]};renderSession();setSync('ok')}
 const SUM=(k,c)=>(DB[k]||[]).reduce((a,r)=>a+(+r[c]||0),0);
 const SPECS={};Object.keys(TREE).forEach(m=>Object.keys(TREE[m]).forEach(n=>{const x=TREE[m][n];if(x&&'@!'.indexOf(x[0])<0)SPECS[m+'|'+n]=x}));
 const CP=k=>{k=k.replace('/','|');const sp=SPECS[k];if(!sp)return[];const c=colsOf(sp);return(DB[k]||[]).map(r=>calc(c,r))};
@@ -261,7 +269,11 @@ const show=v=>['v-dashboard','v-sheet'].forEach(i=>$(i).style.display=i===v?'blo
 let cur=[];
 function openSub(mod,name){show('v-sheet');cur=[mod,name];let sp=TREE[mod][name],key=mod+'|'+name;
  if(sp&&sp[0]==='@'){key=sp.slice(1);const[m,n]=key.split('|');sp=TREE[m][n]}
- const b=$('v-sheet');if(sp&&sp[0]==='!'){b.innerHTML=`<h1 class="ov">${name}</h1><div class="kpis">${sp.slice(1).split('|').map(x=>{const i=x.indexOf('='),l=x.slice(0,i);let v=0;try{v=new Function('S','CNT','D','return '+x.slice(i+1))(S,CNT,D)}catch(e){}return `<div class="kc"><div class="kl">${l}</div><div class="kv" style="font-size:34px">${fmt(v)}${/%$/.test(l)?'%':''}</div></div>`}).join('')}</div>`;return}
+ const b=$('v-sheet');if(sp&&sp[0]==='!'){const it=sp.slice(1).split('|').map(x=>{const i=x.indexOf('='),l=x.slice(0,i);let v=0;try{v=new Function('S','CNT','D','return '+x.slice(i+1))(S,CNT,D)}catch(e){}return{l,v}});
+ const bar=(l,v,c)=>`<div style="display:flex;align-items:center;gap:12px;margin:10px 0"><span style="width:150px;font-size:14px;color:var(--muted)">${l}</span><div class="bar" style="flex:1;height:22px"><span style="width:${Math.min(100,v)}%;${c||''}"></span></div><b style="width:56px">${v}%</b></div>`;
+ let ch=it.filter(i=>/%$/.test(i.l)).map(i=>bar(i.l,i.v)).join('');
+ if(name==='Production'){const g={};(DB['production|Daily Production']||[]).forEach(r=>{const d=r.Date||'-';g[d]=g[d]||{t:0,o:0};g[d].t+=+r.Target||0;g[d].o+=+r.Output||0});ch+=Object.keys(g).sort().map(d=>bar(d,D(g[d].o,g[d].t),'background:linear-gradient(90deg,#16a34a,#4ade80)')).join('')}
+ b.innerHTML=`<h1 class="ov">${name}</h1><div class="kpis">${it.map(i=>`<div class="kc"><div class="kl">${i.l}</div><div class="kv" style="font-size:34px">${fmt(i.v)}${/%$/.test(i.l)?'%':''}</div></div>`).join('')}</div>${ch?`<div class="pn"><div class="pt">Performance</div>${ch}</div>`:''}`;return}
  b.dataset.key=key;b.dataset.sp=sp||'';
  if(!sp){b.innerHTML=`<h1 class="ov">${name}</h1><div class="pn soon">${t('next')}</div>`;return}drawSheet()}
 function drawSheet(){const b=$('v-sheet'),key=b.dataset.key,cols=colsOf(b.dataset.sp),rows=DB[key]=DB[key]||[],cp=rows.map(r=>calc(cols,r));
@@ -308,13 +320,16 @@ let tm;function toast(m){const e=$('toast');e.textContent=m;e.classList.add('sho
 $('eye').onclick=()=>{const p=$('pw');p.type=p.type==='password'?'text':'password'};
 $('chk').onclick=e=>{e.preventDefault();remember=!remember;$('box').classList.toggle('off',!remember)};
 function renderSession(){const d=$('dash');d.classList.toggle('show',!!user);document.body.style.overflow=user?'hidden':'';if(user){renderDash();$('un2').textContent=user.name;$('ua').textContent=user.name[0].toUpperCase()}}
-function submit(){const id=$('un').value.trim(),pw=$('pw').value;
+async function submit(){const id=$('un').value.trim(),pw=$('pw').value;
  if(!id||!pw){toast(t('need'));return}
- if(id.toLowerCase()===USER_ID.toLowerCase()&&pw===USER_PASS){user={name:USER_ID};if(remember)st.set('tx_user',USER_ID);renderSession()}
+ if(id.includes('@')){if(!sb){toast('Cloud library not loaded (check internet)');return}
+  const{data,error}=await sb.auth.signInWithPassword({email:id,password:pw});if(error){toast(error.message);return}await cloudLogin(data.user);return}
+ if(id.toLowerCase()===USER_ID.toLowerCase()&&pw===USER_PASS){user={name:USER_ID};if(remember)st.set('tx_user',USER_ID);CLOUD=false;setSync();renderSession()}
  else toast(t('bad'))}
 $('loginBtn').onclick=submit;[$('un'),$('pw')].forEach(e=>e.addEventListener('keydown',ev=>{if(ev.key==='Enter')submit()}));
-$('out').onclick=()=>{user=null;st.del('tx_user');$('un').value='';$('pw').value='';renderSession()};
-setLang(lang);
+$('out').onclick=()=>{if(CLOUD&&sb){sb.auth.signOut();CLOUD=false}user=null;st.del('tx_user');$('un').value='';$('pw').value='';renderSession()};
+setLang(lang);setSync();
+if(sb)sb.auth.getSession().then(({data})=>{if(data.session&&!user)cloudLogin(data.session.user)});
 </script>
 </body>
 </html>
